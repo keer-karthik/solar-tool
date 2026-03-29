@@ -18,12 +18,27 @@ def apply_theme():
     @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Lato:wght@300;400;700&display=swap');
 
     /* Base */
-    html, body, [class*="css"] {{
+    html, body, [class*="css"],
+    .stApp {{
         font-family: 'Lato', sans-serif;
+        color: {COLORS["black"]};
+    }}
+    .stApp * {{
         color: {COLORS["black"]};
     }}
     .stApp {{
         background-color: {COLORS["eggshell"]};
+    }}
+
+    /* Labels (radio, selectbox, slider, etc.) */
+    .stRadio > label,
+    .stSelectbox > label,
+    .stMultiSelect > label,
+    .stSlider > label,
+    .stCheckbox > label,
+    [data-testid="stWidgetLabel"],
+    [data-testid="stWidgetLabel"] p {{
+        color: {COLORS["black"]} !important;
     }}
 
     /* Headings */

@@ -20,9 +20,9 @@ CHART_LAYOUT = dict(
     paper_bgcolor="rgba(0,0,0,0)",
     font=dict(family="Lato, sans-serif", color=COLORS["black"]),
     title_font=dict(family="Instrument Serif, serif", size=22, color=COLORS["black"]),
-    xaxis=dict(gridcolor="rgba(0,0,0,0.05)"),
-    yaxis=dict(gridcolor="rgba(0,0,0,0.08)"),
-    legend=dict(bgcolor="rgba(0,0,0,0)"),
+    xaxis=dict(gridcolor="rgba(0,0,0,0.05)", tickfont=dict(color=COLORS["black"])),
+    yaxis=dict(gridcolor="rgba(0,0,0,0.08)", tickfont=dict(color=COLORS["black"])),
+    legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(color=COLORS["black"])),
     margin=dict(t=50, b=40, l=40, r=20),
 )
 
@@ -64,7 +64,7 @@ fig1.add_trace(go.Scatter(
 ))
 fig1.update_layout(**CHART_LAYOUT, title="Actual vs Predicted Monthly Consumption",
                    xaxis_title="", yaxis_title="kWh", xaxis_tickangle=-45)
-st.plotly_chart(fig1, use_container_width=True)
+st.plotly_chart(fig1, use_container_width=True, theme=None)
 
 # --- Forecast ---
 last_idx = fitted_df["trend"].iloc[-1]
@@ -81,7 +81,7 @@ fig2 = px.bar(combined, x="year_month", y="kWh", color="type",
               labels={"year_month": ""},
               color_discrete_map={"Historical": COLORS["olive"], "Forecast": COLORS["harvest_gold"]})
 fig2.update_layout(**CHART_LAYOUT, xaxis_tickangle=-45)
-st.plotly_chart(fig2, use_container_width=True)
+st.plotly_chart(fig2, use_container_width=True, theme=None)
 
 # --- CDD Scatter ---
 fig3 = px.scatter(fitted_df, x="monthly_cdd", y="units", color="year",
@@ -89,7 +89,7 @@ fig3 = px.scatter(fitted_df, x="monthly_cdd", y="units", color="year",
                   labels={"monthly_cdd": "Monthly CDD", "units": "kWh"},
                   color_discrete_sequence=PLOTLY_COLORS)
 fig3.update_layout(**CHART_LAYOUT)
-st.plotly_chart(fig3, use_container_width=True)
+st.plotly_chart(fig3, use_container_width=True, theme=None)
 
 # --- Forecast table ---
 rate = (fitted_df["charges"].sum() / fitted_df["units"].sum()) if fitted_df["units"].sum() > 0 else 6.58

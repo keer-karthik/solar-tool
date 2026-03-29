@@ -18,9 +18,9 @@ CHART_LAYOUT = dict(
     paper_bgcolor="rgba(0,0,0,0)",
     font=dict(family="Lato, sans-serif", color=COLORS["black"]),
     title_font=dict(family="Instrument Serif, serif", size=22, color=COLORS["black"]),
-    xaxis=dict(gridcolor="rgba(0,0,0,0.05)"),
-    yaxis=dict(gridcolor="rgba(0,0,0,0.08)"),
-    legend=dict(bgcolor="rgba(0,0,0,0)"),
+    xaxis=dict(gridcolor="rgba(0,0,0,0.05)", tickfont=dict(color=COLORS["black"])),
+    yaxis=dict(gridcolor="rgba(0,0,0,0.08)", tickfont=dict(color=COLORS["black"])),
+    legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(color=COLORS["black"])),
     margin=dict(t=50, b=40, l=40, r=20),
 )
 
@@ -73,7 +73,7 @@ else:
                  category_orders={"month_name": list(MONTH_NAMES.values())})
     fig.update_layout(**CHART_LAYOUT)
 
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, use_container_width=True, theme=None)
 
 # --- Monthly charges chart ---
 if view == "Timeline":
@@ -93,7 +93,7 @@ else:
                   category_orders={"month_name": list(MONTH_NAMES.values())})
     fig2.update_layout(**CHART_LAYOUT)
 
-st.plotly_chart(fig2, use_container_width=True)
+st.plotly_chart(fig2, use_container_width=True, theme=None)
 
 # --- Rate trend ---
 fig3 = go.Figure()
@@ -106,7 +106,7 @@ fig3.add_trace(go.Scatter(
 ))
 fig3.update_layout(**CHART_LAYOUT, title="Electricity Rate Trend",
                    xaxis_title="", yaxis_title="INR/kWh", showlegend=False)
-st.plotly_chart(fig3, use_container_width=True)
+st.plotly_chart(fig3, use_container_width=True, theme=None)
 
 # --- Annual summary ---
 annual = filtered.groupby("year").agg(
