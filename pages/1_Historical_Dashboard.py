@@ -76,7 +76,7 @@ else:
                  category_orders={"month_name": list(MONTH_NAMES.values())})
     fig.update_layout(**CHART_LAYOUT)
 
-st.plotly_chart(fig, use_container_width=True, theme=None)
+st.plotly_chart(fig, width="stretch", theme=None)
 
 # --- Monthly charges chart ---
 if view == "Timeline":
@@ -96,7 +96,7 @@ else:
                   category_orders={"month_name": list(MONTH_NAMES.values())})
     fig2.update_layout(**CHART_LAYOUT)
 
-st.plotly_chart(fig2, use_container_width=True, theme=None)
+st.plotly_chart(fig2, width="stretch", theme=None)
 
 # --- Rate trend ---
 fig3 = go.Figure()
@@ -109,7 +109,7 @@ fig3.add_trace(go.Scatter(
 ))
 fig3.update_layout(**CHART_LAYOUT, title="Electricity Rate Trend",
                    xaxis_title="", yaxis_title="INR/kWh", showlegend=False)
-st.plotly_chart(fig3, use_container_width=True, theme=None)
+st.plotly_chart(fig3, width="stretch", theme=None)
 
 # --- Annual summary ---
 annual = filtered.groupby("year").agg(
@@ -117,11 +117,11 @@ annual = filtered.groupby("year").agg(
     avg_monthly=("units", "mean"), peak_month=("units", "max"), low_month=("units", "min"),
 ).round(0).astype(int)
 st.subheader("Annual Summary")
-st.dataframe(annual, use_container_width=True)
+st.dataframe(annual, width="stretch")
 
 # --- Raw data ---
 if show_raw:
     st.subheader("Raw Bimonthly Bills")
     st.dataframe(bills_df[["bill_date", "consumption_units", "total_charges",
                            "rate_per_unit", "period_days"]].set_index("bill_date"),
-                 use_container_width=True)
+                 width="stretch")

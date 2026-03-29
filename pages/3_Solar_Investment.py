@@ -171,7 +171,7 @@ fig1.update_layout(
     title="Monthly Solar Generation vs Consumption",
     barmode="group", xaxis_title="", yaxis_title="kWh", xaxis_tickangle=-45,
 )
-st.plotly_chart(fig1, use_container_width=True, theme=None)
+st.plotly_chart(fig1, width="stretch", theme=None)
 
 # ---------------------------------------------------------------------------
 # Chart 2: Grid consumption before vs after solar
@@ -190,7 +190,7 @@ fig2.update_layout(
     title="Grid Consumption: Before vs After Solar",
     barmode="overlay", xaxis_title="", yaxis_title="kWh", xaxis_tickangle=-45,
 )
-st.plotly_chart(fig2, use_container_width=True, theme=None)
+st.plotly_chart(fig2, width="stretch", theme=None)
 
 # ---------------------------------------------------------------------------
 # Chart 3: Cumulative cash flow
@@ -217,7 +217,7 @@ fig3.update_layout(
     title=f"Cumulative Cash Flow over {lifespan}-Year Project Life (after subsidies)",
     xaxis_title="Year", yaxis_title="INR",
 )
-st.plotly_chart(fig3, use_container_width=True, theme=None)
+st.plotly_chart(fig3, width="stretch", theme=None)
 
 # ---------------------------------------------------------------------------
 # Annual performance table
@@ -236,7 +236,7 @@ ann_display = annual.rename(columns={
     "self_consumption_pct": "Self-Use (%)",
     "solar_fraction_pct": "Solar Fraction (%)",
 })
-st.dataframe(ann_display.set_index("Year"), use_container_width=True)
+st.dataframe(ann_display.set_index("Year"), width="stretch")
 
 # ---------------------------------------------------------------------------
 # Year-by-year financial projection
@@ -252,7 +252,7 @@ for t, cf in enumerate(cashflows):
         "Cumulative (INR)": f"₹{running:,.0f}",
         "Discounted CF (INR)": f"₹{cf / (1 + discount_rate) ** t:,.0f}",
     })
-st.dataframe(pd.DataFrame(proj_rows).set_index("Year"), use_container_width=True)
+st.dataframe(pd.DataFrame(proj_rows).set_index("Year"), width="stretch")
 
 st.info(
     f"Avg annual generation: **{avg_annual_gen_kwh:,.0f} kWh** · "

@@ -107,7 +107,7 @@ with col_right:
             ]
             if not bad_rows.empty:
                 st.error(f"{len(bad_rows)} row(s) have missing or non-positive values. Fix them and re-upload.")
-                st.dataframe(bad_rows, use_container_width=True)
+                st.dataframe(bad_rows, width="stretch")
                 st.stop()
 
             if len(df_raw) < 4:
@@ -128,7 +128,7 @@ with col_right:
             preview["bill_date"] = preview["bill_date"].dt.strftime("%Y-%m-%d")
             preview.columns = ["Bill Date", "Units (kWh)", "Charges (INR)",
                                 "Period (days)", "Rate (INR/kWh)"]
-            st.dataframe(preview.set_index("Bill Date"), use_container_width=True)
+            st.dataframe(preview.set_index("Bill Date"), width="stretch")
 
             c1, c2, c3 = st.columns(3)
             c1.metric("Total bills", len(bills_df))
