@@ -65,16 +65,19 @@ degradation_rate_pct = st.sidebar.slider("Annual Degradation (%)", 0.3, 1.0, 0.5
 # ---------------------------------------------------------------------------
 # Load data
 # ---------------------------------------------------------------------------
+bills_df = st.session_state.get("user_bills") or load_bills()
+_bills_key = st.session_state.get("user_bills_key", "default")
+
+
 @st.cache_data(ttl=3600)
-def load_all():
-    bills = load_bills()
+def load_all(_bills, bills_key):
     weather = get_weather_data()
-    monthly = disaggregate_to_monthly(bills, weather)
+    monthly = disaggregate_to_monthly(_bills, weather)
     solar = get_solar_data()
     return monthly, solar
 
 
-monthly_df, solar_df = load_all()
+monthly_df, solar_df = load_all(bills_df, _bills_key)
 
 savings_df = simulate_savings(
     monthly_df, solar_df, system_kw, battery_kwh, performance_ratio, export_rate

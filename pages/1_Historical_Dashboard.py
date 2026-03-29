@@ -28,15 +28,18 @@ MONTH_NAMES = {1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun",
                7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec"}
 
 
+bills_df = st.session_state.get("user_bills") or load_bills()
+_bills_key = st.session_state.get("user_bills_key", "default")
+
+
 @st.cache_data(ttl=3600)
-def load_all():
-    bills = load_bills()
+def load_all(_bills, bills_key):
     weather = get_weather_data()
-    monthly = disaggregate_to_monthly(bills, weather)
-    return bills, monthly
+    monthly = disaggregate_to_monthly(_bills, weather)
+    return monthly
 
 
-bills_df, monthly_df = load_all()
+monthly_df = load_all(bills_df, _bills_key)
 
 # --- Sidebar ---
 years = sorted(monthly_df["year"].unique())

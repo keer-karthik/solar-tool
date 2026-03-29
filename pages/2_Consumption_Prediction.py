@@ -32,17 +32,20 @@ base_load = st.sidebar.slider("Base Load (kWh/day)", 4.0, 15.0, 8.0, 0.5)
 horizon = st.sidebar.slider("Forecast Months", 6, 24, 12)
 
 
+bills_df = st.session_state.get("user_bills") or load_bills()
+_bills_key = st.session_state.get("user_bills_key", "default")
+
+
 @st.cache_data(ttl=3600)
-def load_and_model(_cdd_base, _base_load):
-    bills = load_bills()
-    weather = get_weather_data(cdd_base=_cdd_base)
-    monthly = disaggregate_to_monthly(bills, weather, base_load=_base_load)
+def load_and_model(_bills, bills_key, cdd_base, base_load):
+    weather = get_weather_data(cdd_base=cdd_base)
+    monthly = disaggregate_to_monthly(_bills, weather, base_load=base_load)
     feat = build_features(monthly, weather)
     model, fitted, metrics = train_model(feat)
     return weather, model, fitted, metrics
 
 
-weather_df, model, fitted_df, metrics = load_and_model(cdd_base, base_load)
+weather_df, model, fitted_df, metrics = load_and_model(bills_df, _bills_key, cdd_base, base_load)
 
 # --- KPIs ---
 st.header("Consumption Prediction")
