@@ -1,0 +1,6 @@
+[theme]
+primaryColor       = "#D49622"   # harvest gold — sliders, checkboxes, active elements
+backgroundColor    = "#F7F2DE"   # eggshell — main page background
+secondaryBackgroundColor = "#EDE8CF"   # slightly darker eggshell — dataframe headers, sidebar, input fills
+textColor          = "#1D282F"   # black — all body text
+font               = "sans serif"

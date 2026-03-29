@@ -188,9 +188,35 @@ def apply_theme():
         color: {COLORS["eggshell"]} !important;
     }}
 
-    /* Dataframe */
+    /* Dataframe wrapper */
     .stDataFrame {{
         border: none !important;
+    }}
+
+    /* Markdown tables (expanders, landing page) */
+    .stMarkdown table {{
+        border-collapse: collapse;
+        width: 100%;
+        background-color: {COLORS["eggshell"]} !important;
+    }}
+    .stMarkdown table th {{
+        background-color: {COLORS["light_gold"]} !important;
+        color: {COLORS["black"]} !important;
+        font-family: 'Lato', sans-serif !important;
+        font-weight: 700 !important;
+        padding: 0.5rem 0.75rem !important;
+        border: 1px solid {COLORS["harvest_gold"]} !important;
+        text-align: left !important;
+    }}
+    .stMarkdown table td {{
+        background-color: {COLORS["eggshell"]} !important;
+        color: {COLORS["black"]} !important;
+        font-family: 'Lato', sans-serif !important;
+        padding: 0.45rem 0.75rem !important;
+        border: 1px solid rgba(29, 40, 47, 0.12) !important;
+    }}
+    .stMarkdown table tr:nth-child(even) td {{
+        background-color: rgba(229, 205, 133, 0.15) !important;
     }}
 
     /* Info box */
