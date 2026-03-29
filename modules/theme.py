@@ -108,8 +108,9 @@ def apply_theme():
         font-weight: 700 !important;
     }}
 
-    /* Buttons as plain text links */
-    .stButton > button {{
+    /* Buttons as plain text links (secondary / default) */
+    .stButton > button,
+    [data-testid="stBaseButton-secondary"] {{
         background: none !important;
         border: none !important;
         box-shadow: none !important;
@@ -120,7 +121,56 @@ def apply_theme():
         text-decoration: underline;
         text-underline-offset: 3px;
     }}
-    .stButton > button:hover {{
+    .stButton > button:hover,
+    [data-testid="stBaseButton-secondary"]:hover {{
+        color: {COLORS["black"]} !important;
+    }}
+
+    /* Primary button — solid harvest gold */
+    [data-testid="stBaseButton-primary"] {{
+        background-color: {COLORS["harvest_gold"]} !important;
+        border: none !important;
+        box-shadow: none !important;
+        color: {COLORS["eggshell"]} !important;
+        font-family: 'Lato', sans-serif !important;
+        font-weight: 700 !important;
+        border-radius: 4px !important;
+        padding: 0.5rem 1.25rem !important;
+        text-decoration: none !important;
+    }}
+    [data-testid="stBaseButton-primary"]:hover {{
+        background-color: {COLORS["black"]} !important;
+        color: {COLORS["eggshell"]} !important;
+    }}
+
+    /* Download button — outlined harvest gold */
+    [data-testid="stDownloadButton"] button,
+    [data-testid="stDownloadButton"] > button {{
+        background: none !important;
+        border: 1.5px solid {COLORS["harvest_gold"]} !important;
+        box-shadow: none !important;
+        color: {COLORS["harvest_gold"]} !important;
+        font-family: 'Lato', sans-serif !important;
+        font-weight: 700 !important;
+        border-radius: 4px !important;
+        padding: 0.4rem 1rem !important;
+        text-decoration: none !important;
+    }}
+    [data-testid="stDownloadButton"] button:hover {{
+        background-color: {COLORS["harvest_gold"]} !important;
+        color: {COLORS["eggshell"]} !important;
+    }}
+
+    /* File uploader dropzone */
+    [data-testid="stFileUploaderDropzone"],
+    [data-testid="stFileUploadDropzone"] {{
+        background-color: rgba(247, 242, 222, 0.6) !important;
+        border: 1.5px dashed {COLORS["harvest_gold"]} !important;
+        border-radius: 4px !important;
+    }}
+    [data-testid="stFileUploaderDropzone"] *,
+    [data-testid="stFileUploadDropzone"] *,
+    [data-testid="stFileUploaderDropzoneInstructions"] * {{
         color: {COLORS["black"]} !important;
     }}
 
@@ -130,8 +180,11 @@ def apply_theme():
         border: 1px solid {COLORS["light_gold"]} !important;
     }}
 
-    /* Checkbox */
+    /* Checkbox — eggshell only in black sidebar, black everywhere else */
     .stCheckbox label span {{
+        color: {COLORS["black"]} !important;
+    }}
+    section[data-testid="stSidebar"] .stCheckbox label span {{
         color: {COLORS["eggshell"]} !important;
     }}
 
